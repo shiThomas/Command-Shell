@@ -1,0 +1,36 @@
+#include <unistd.h>
+
+#include <cstdlib>
+#include <cstring>
+#include <iostream>
+#include <sstream>
+#include <string>
+using namespace std;
+#include "methods.h"
+void print_prompt() {
+  std::cout << "myShell"
+            << " $ ";
+}
+
+bool check_exit(std::string command_input) {
+  bool flag = false;
+  if (command_input == "exit") {
+    flag = true;
+  }
+  return flag;
+}
+
+int main() {
+  string command_input;
+  vector<string> argv;
+  while (1) {
+    print_prompt();
+    getline(std::cin, command_input);
+    if (check_exit(command_input)) {
+      return 0;
+    }
+    argv = parse_command(command_input);
+    execute(argv);
+    print_prompt();
+  }
+}

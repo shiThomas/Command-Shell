@@ -1,0 +1,81 @@
+#ifndef methods_H
+#define methods_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+#include <cstdlib>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+//define behavior of fork and execve.
+using namespace std;
+
+vector<char *> GetPath(vector<char *> argv) {  //use vector to eliminate effect of memory leak
+  vector<char *> envalue;
+  string path = argv[0];  //change char* to string
+  if (path.find('/') == string::npos) {
+    envalue[0] = getenv("PATH");
+    if (envalue[0] == NULL) {
+      cout << "Command commandName not found" << '\n';
+      cout << "[replace commandName with the actual command name]";
+    }
+  }
+  return envalue;
+}
+
+vector<char *> parse_command(std::string command_input) {
+  vector<string> argv_temp;
+  vector<char *> argv;
+  std::stringstream input(command_input);
+  string result;
+  while (input >> result) {
+    argv_temp.push_back(result);
+  }
+  for (vector<string>::iterator it = argv_temp.begin(); it != argv_temp.end(); ++it) {
+    argv.push_back(&(*it)[0]);  //convert vector<string> to vector<char*>
+  }
+  argv.push_back(NULL);
+  return argv;
+}
+
+void child(vector<char *> argv) {
+  char ** newenviron = {NULL};
+  argv.push_back(NULL);  //last element needs to be NULL;
+  execve(argv[0], &argv[0], newenviron);
+  perror("execve");
+  exit(EXIT_FAILURE);
+}
+
+void execute(vector<char *> argv) {
+  pid_t cpid, w;
+  int status;
+  cpid = fork();
+  if (cpid == -1) {
+    perror("fork");
+    exit(EXIT_FAILURE);
+  }
+
+  if (cpid == 0) { /* Code executed by child */
+    child(argv);
+  }
+  else { /* Code executed by parent */
+    do {
+      w = waitpid(cpid, &status, WUNTRACED | WCONTINUED);
+      if (w == -1) {
+        perror("waitpid");
+        exit(EXIT_FAILURE);
+      }
+
+      if (WIFEXITED(status)) {
+        printf(" Program exited with status %d\n", WEXITSTATUS(status));
+      }
+      else if (WIFSIGNALED(status)) {
+        printf("Program was killed by signal %d\n", WTERMSIG(status));
+      }
+    } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+  }
+}
+#endif

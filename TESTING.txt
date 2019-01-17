@@ -1,0 +1,501 @@
+All following testcases are valgrind clean.
+--------------------------------------------------------------------------------
+********************************************************************************
+
+ Step 1:
+--------------------------------------------------------------------------------
+1.1 Run ./test_myshell
+
+--------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $
+
+The prompt above will show up, and input can be typed in after "$" sign.
+1.2 Run ./test_myshell
+
+--------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ exit
+------------------------------------------------
+ws146@ece551:~/ece551/mp_miniproject$
+
+Explanation: This is correct because exit quit myshell, and return to the current directory.
+
+1.3 Run ./test_myshell
+
+--------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $
+if input is EOF(which is Ctrl+D)
+
+Myshell quits, and return to the current directory.
+
+1.4 Run ./test_myshell
+
+--------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ /bin/ls
+commandShell.txt  methods.h   myShell.cpp   numerics.txt  runtest      testcase.cpp~  test_myshell
+Makefile          methods.h~  myShell.cpp~  README        runtest.cpp  TESTING.txt
+ Program exited with status 0
+
+Explanation: This is correct becasue this command prints same result with what real shell prints.
+
+1.5 Run ./test_myshell
+
+--------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $                                  exit
+---------------------------------------------------------------------------------
+ws146@ece551:~/ece551/mp_miniproject$
+
+Explanation: This is correct because space before exit is eliminated.
+
+1.6 Run ./test_myshell
+
+---------------------------------------------------------------------------------
+ws146@ece551:~/ece551/mp_miniproject$ ./test_myshell
+myShell:/home/ws146/ece551/mp_miniproject $ ./test_myshell
+myShell:/home/ws146/ece551/mp_miniproject $  Program exited with status 0
+myShell:/home/ws146/ece551/mp_miniproject $ ws146@ece551:~/ece551/mp_miniproject$
+
+Explanation: This exit behavior is correct because when enter myshell twice, I need two EOF to exit.
+
+
+1.7 Run ./test_myshell
+
+----------------------------------------------------------------------------------
+if single enter is passed into myshell
+
+myShell:/home/ws146/ece551/mp_miniproject $
+--------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $
+
+Explanation: this is correct because enter, does not change behavior of myshell, and should not print error message. 
+
+
+1.8 Run ./test_myshell
+
+-----------------------------------------------------------------------------------
+if "                                        " and enter is passed 
+
+myShell:/home/ws146/ece551/mp_miniproject $
+-------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $
+
+Explanation: this is correct because space does not create an input with space, it return empty command. This acts same as just single enter. 
+
+
+1.9 Run ./test_myshell 
+
+------------------------------------------------------------------------------------
+
+myShell:/home/ws146/ece551/mp_miniproject $ ./$HOME
+---------------------------------------------------
+Command not found
+
+Explanation: this is correct because this is not a valid function.
+
+1.10 run ./test_myshell
+
+--------------------------------------------------------------------------------
+
+myShell:/home/ws146/ece551/mp_miniproject $ /bin/ls dafa
+--------------------------------------------------------
+/bin/ls: cannot access 'dafa': No such file or directory
+ Program exited with status 2
+
+Explanation: this is correct because ls does not have arguments after it 
+
+
+************************************************************************************
+
+
+Step 2:
+
+2.1 Run ./test_myshell
+
+------------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ env
+
+-----------------------------------------------
+
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+SSH_CONNECTION=10.197.95.93 58348 152.3.77.223 22
+LESSCLOSE=/usr/bin/lesspipe %s %s
+LANG=en_US.UTF-8
+OLDPWD=/home/ws146/ece551
+EDITOR=emacs -nw
+S_COLORS=auto
+XDG_SESSION_ID=58
+USER=ws146
+PWD=/home/ws146/ece551/mp_miniproject
+HOME=/home/ws146
+SSH_CLIENT=10.197.95.93 58348 22
+SSH_TTY=/dev/pts/27
+MAIL=/var/mail/ws146
+VISUAL=emacs -nw
+TERM=xterm
+SHELL=/bin/bash
+SHLVL=1
+LOGNAME=ws146
+XDG_RUNTIME_DIR=/run/user/1310
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+LESSOPEN=| /usr/bin/lesspipe %s
+_=./test_myshell
+ECE551PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+ Program exited with status 0
+
+Explanation: This is correct because ECE551PATH is pushed to environment variable list, with value set to PATH, and all values show up in when "env" is typed.
+
+2.2 run ./test_myshell
+
+---------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ safda
+Command not found
+myShell:/home/ws146/ece551/mp_miniproject $
+
+Explanation: This is correct because safda is not a valid command, and myshell does not exit because of this error.
+
+2.3 run ./test_myshell
+
+---------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ cat fqgq
+/bin/cat: fqgq: No such file or directory
+ Program exited with status 1
+
+Explanation: This is correct because fqgq is not a correct file name.
+
+2.4 run ./test_myshell
+
+---------------------------------------------------------------------------------
+
+myShell:/home/ws146/ece551/mp_miniproject $ cat runtest.cpp
+
+Result should be same as result if command is run in real shell.
+
+
+(For 2.5 - 2.9 ,I have a separate file which print each of the parsed argument. 
+2.5 run ./test_myshell
+
+---------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ ./runtest a b 23
+argv[0] = ./runtest
+argv[1] = a
+argv[2] = b
+argv[3] = 23
+ Program exited with status 0
+
+
+Explanation: the print above is correct because a, b and 23 are saparated by single space. 
+
+
+2.6 run ./test_myshell
+
+--------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ ./runtest          a             b   23
+argv[0] = ./runtest
+argv[1] = a
+argv[2] = b
+argv[3] = 23
+ Program exited with status 0
+
+Explanation: the print above is correct because a, b and 23 are saparated by only spaces.
+
+2.7 run ./test_myshell
+
+--------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ ./runtest a\ b c\ \ d
+argv[0] = ./runtest
+argv[1] = a b
+argv[2] = c  d
+ Program exited with status 0
+
+Explanation: the print above is correct because a and b are saparated by \+space, which prints a single space. \+space+\+space prints two spaces.
+
+2.8 run./test_myshell
+
+--------------------------------------------------------------------------------
+
+myShell:/home/ws146/ece551/mp_miniproject $ ./runtest a\  b c \ d
+argv[0] = ./runtest
+argv[1] = a
+argv[2] = b
+argv[3] = c
+argv[4] =  d
+ Program exited with status 0
+
+Explanation: the print above is correct becasue there is an extra space between space and b, also an extra space between c and \.
+
+2.9 run ./test_myshell
+
+--------------------------------------------------------------------------------
+ myShell:/home/ws146/ece551/mp_miniproject $ ./runtest \\
+argv[0] = ./runtest
+argv[1] = \
+ Program exited with status 0
+
+Explanation: the print above is correct becasue two \ sign should return a single \ sign.
+
+2.10 run ./test_myshell
+
+-------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ exit safdafdaf
+----------------------------------------------------------
+ws146@ece551:~/ece551/mp_miniproject$
+
+Explanation: exit behavior above is correct, exit command does not care what command is after it.
+
+2.11 run ./test_myshell
+
+-------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ ass exit
+----------------------------------------------------
+Command not found
+
+Explanation: the error message printed is correct because ass is not a command, though there is exit existing in the argument.
+
+
+
+********************************************************************************
+
+Step 3:
+
+
+3.1 Run ./test_myshell
+
+-------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ cd
+----------------------------------------------
+myShell:/home/ws146 $
+
+Explanation: the directory above is correct, because single cd return to where home direcectory is at.
+
+3.2 Run ./test_myshell
+
+------------------------------------------------------------------------------
+myShell:/home/ws146 $ cd ece551
+-------------------------------
+myShell:/home/ws146/ece551 $
+
+Explanation: the directory above is correct, because when cd ece551, direcory should be changed to the dired one.
+
+3.3 Run ./test_myshell
+
+------------------------------------------------------------------------------
+myShell:/home/ws146/ece551 $ cd ..
+----------------------------------
+myShell:/home/ws146 $
+
+Explanation: the directory above is correct, because when cd .., directory should be changed to one directory upper.
+
+3.4 Run ./test_myshell
+
+------------------------------------------------------------------------------
+myShell:/home/ws146 $ cd safa
+-------------------------------
+ cannot open directory: No such file or directory
+
+Explanation: the error message printed is correct, becasue safa is not a valid directory name.
+
+3.5 Run ./test_myshell
+
+------------------------------------------------------------------------------
+myShell:/home/ws146 $ cd\        ece551
+-----------------------------------------
+Command not found
+
+Explanation: the error message printed is correct, because cd\          gives me cd+space, which is not a valid command name;
+
+3.6 Run ./test_myshell
+
+-------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ set B 3
+myShell:/home/ws146/ece551/mp_miniproject $ export B
+myShell:/home/ws146/ece551/mp_miniproject $ env
+
+In the list printed which contains environment variables, B=3 should be one of the argument 
+
+Explanation: this is correct because B is set to 3,and is exoport to env
+
+
+3.7 Run ./test_myshell
+
+-------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ set B 3
+myShell:/home/ws146/ece551/mp_miniproject $ set B 2
+myShell:/home/ws146/ece551/mp_miniproject $ echo $B
+------------------------------------------------------
+2
+ Program exited with status 0
+
+Explanation: this is correct because B is set to 3, and then it is overwritten with 2.
+
+3.8 Run ./test_myshell
+
+myShell:/home/ws146/ece551/mp_miniproject $ set x exit
+myShell:/home/ws146/ece551/mp_miniproject $ $x
+-------------------------------------------------------------------------------
+Command not found
+
+Explanation: I have this output because exit is defined outside of function part, so $x does not return exit value.
+
+3.9 Run ./test_myshell
+
+-------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ set x ls
+myShell:/home/ws146/ece551/mp_miniproject $ $x
+----------------------------------------------------------
+commandShell.txt  methods.h   myShell.cpp   numerics.txt  runtest      testcase.cpp~  test_myshell
+Makefile          methods.h~  myShell.cpp~  README        runtest.cpp  TESTING.tx
+ Program exited with status 0
+
+Explanation: this is correct because ls is value of x, $ replace x command line with actual value ls.
+
+3.10 Run ./test_myshell
+
+--------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ set a l
+myShell:/home/ws146/ece551/mp_miniproject $ set b s
+myShell:/home/ws146/ece551/mp_miniproject $ $a$b
+---------------------------------------------------
+commandShell.txt  methods.h   myShell.cpp   numerics.txt  runtest      testcase.cpp~  test_myshell
+Makefile          methods.h~  myShell.cpp~  README        runtest.cpp  TESTING.txt
+ Program exited with status 0
+
+Explanation: this is correct because $a has is replaced by l, and $b is replaced by s, so $a$b has value ls, which should have same function with ls.
+
+3.10 Run ./test_myshell
+
+---------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ set a
+--------------------------------------------------
+too few arguments for set: No such file or directory
+
+Explanation: this is correct because a third argument is needed to set a value.
+
+3.11 Run./test_myshell
+
+----------------------------------------------------------------------------------
+yShell:/home/ws146/ece551/mp_miniproject $ set a cat README
+myShell:/home/ws146/ece551/mp_miniproject $ $a
+---------------------------------------------------------
+Command not found
+
+Explanation: this is correct because cat README is not parsed when is treated as value of a. cat README is not parsed, it acts as command which does not exit.
+
+3.12 Run ./test_myshell
+
+----------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ set a $V
+myShell:/home/ws146/ece551/mp_miniproject $ set V 3
+myShell:/home/ws146/ece551/mp_miniproject $ echo $a$V$a
+-------------------------------------------------------
+$V3$V
+ Program exited with status 0
+
+Explanation: this is correct because set changes whatever comes after a to a, so $V does not evaluate value of V.
+
+3.13 Run ./test_myshell
+
+-----------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ set a -1
+myShell:/home/ws146/ece551/mp_miniproject $ inc a
+myShell:/home/ws146/ece551/mp_miniproject $ echo $a
+---------------------------------------------------
+0
+ Program exited with status 0
+
+Explanation: this is correct, because if a is -1, inc a should perform a++. This is to check if -1 can change to 0.
+
+3.14 Run ./test_myshell
+
+------------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ set a 0
+myShell:/home/ws146/ece551/mp_miniproject $ inc a
+myShell:/home/ws146/ece551/mp_miniproject $ echo $a
+----------------------------------------------------
+1
+ Program exited with status 0
+
+Explanation: this iscorrect, because if a is 0 inc a increase it by 1.
+
+3.15 Run ./test_myshell
+
+-------------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ set a q
+myShell:/home/ws146/ece551/mp_miniproject $ echo $a
+q
+ Program exited with status 0
+myShell:/home/ws146/ece551/mp_miniproject $ inc a
+myShell:/home/ws146/ece551/mp_miniproject $ echo $a
+1
+ Program exited with status 0
+
+Explanation: this is correct because q is not a number, if inc a, then a will be treated as 0, and increased by 1.
+
+3.16 Run ./test_myshell
+
+-------------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ echo $e
+
+ Program exited with status 0
+myShell:/home/ws146/ece551/mp_miniproject $ inc e
+myShell:/home/ws146/ece551/mp_miniproject $ echo $e
+1
+ Program exited with status 0
+
+Explanation: this is correct because e is not set before. if inc e, then e will be treated as 0, and increased by 1.
+
+3.17 Run./test_myshell
+
+-------------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ set s 1
+myShell:/home/ws146/ece551/mp_miniproject $ env
+
+There is no arguments "s=1" when env is typed in.
+
+Explanation: when export is not called, value in the env should not show up.
+
+3.18 Run./test_myshell
+
+--------------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ set ECE551PATH /usr/bin
+myShell:/home/ws146/ece551/mp_miniproject $ export ECE551PATH
+myShell:/home/ws146/ece551/mp_miniproject $ ls
+--------------------------------------------------------------------
+Command not found
+
+Explanation: this is correct because if ECE551PATH is not set with a new path, it no longer contains /bin any more. So it is impossible to find ls in that directory.
+
+3.19 Run ./test_myshell
+
+---------------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ set a^^ s
+------------------------------------------------------
+invalid variable name: No such file or directory
+
+Explanation: this is correct because a^^ is not a valid input.
+
+
+3.20 Run ./test_myshell
+
+----------------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ set a b\ ccc d d
+myShell:/home/ws146/ece551/mp_miniproject $ echo $a
+-------------------------------------------------------------
+b\ ccc d d
+ Program exited with status 0
+
+
+Explanation: \+space should not be considered in this set situation, because it sets it value to whatever that is behind a.
+
+
+3.21 Run ./test_myshell
+
+-----------------------------------------------------------------------------------------
+myShell:/home/ws146/ece551/mp_miniproject $ $set a g
+Command not found
+
+Explanation: this is correct because if variable name is not assigned with any value, it is empty, which should not perform any function. 
+
+
+
+
+
+
